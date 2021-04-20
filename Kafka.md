@@ -113,5 +113,5 @@ docker-compose exec kafka \
 #### Example 3. Watch Topic
 
 ```bash
-docker-compose exec mids kafkacat -C -b kafka:29092 -t join_events -o beginning
+docker-compose exec mids kafkacat -C -b kafka:29092 -t topic_name -o beginning
 ```
