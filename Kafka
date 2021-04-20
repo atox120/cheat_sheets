@@ -1,0 +1,11 @@
+# Kafka
+
+This document outlines some useful commands and functions for using Apache Kafka[https://kafka.apache.org/]. 
+
+# Kafka and Docker
+
+### Create a topic
+
+```bash
+docker-compose exec kafka kafka-topics --create --topic join_events --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+```
