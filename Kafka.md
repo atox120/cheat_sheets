@@ -34,11 +34,17 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     volumes:
-     # - ~/dir:/dir <--update if using e.g. ~/mids:/mids
+      - ~/w205:/205 #<--update if using e.g. ~/mids:/mids
     expose:
       - "9092"
       - "29092"
-      
+
+  mids:
+    image: midsw205/base:latest
+    stdin_open: true
+    tty: true
+    volumes:
+      - ~/w205:/w205      
 ```
 
 ### Spin up containers:
@@ -79,7 +85,7 @@ Checks that the topic was created, shows some config.
 docker-compose exec kafka kafka-topics --describe --topic topic_name --zookeeper zookeeper:32181
 ```
 
-### Example publish event:
+#### Example 1. publish event:
 
 Here we publish some numbers to a topic topic_name. We use the kafka container console to do so (see docker-compose file above)' . 
 
@@ -103,3 +109,9 @@ docker-compose exec kafka \
     --from-beginning \
     --max-messages 10
 ```    
+
+#### Example 3. Watch Topic
+
+```bash
+docker-compose exec mids kafkacat -C -b kafka:29092 -t join_events -o beginning
+```
