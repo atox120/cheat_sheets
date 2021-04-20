@@ -34,17 +34,17 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     volumes:
-      - ~/w205:/205 #<--update if using e.g. ~/mids:/mids
+      - ~/base:/base #<--update if using e.g. ~/mids:/mids
     expose:
       - "9092"
       - "29092"
 
-  mids:
-    image: midsw205/base:latest
+  base:
+    image: atox120/base:latest
     stdin_open: true
     tty: true
     volumes:
-      - ~/w205:/w205      
+      - ~/base:/base      
 ```
 
 ### Spin up containers:
@@ -113,5 +113,5 @@ docker-compose exec kafka \
 #### Example 3. Watch Topic
 
 ```bash
-docker-compose exec mids kafkacat -C -b kafka:29092 -t topic_name -o beginning
+docker-compose exec base kafkacat -C -b kafka:29092 -t topic_name -o beginning
 ```
