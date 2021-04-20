@@ -102,4 +102,4 @@ docker-compose exec kafka \
     --topic topic_name \
     --from-beginning \
     --max-messages 10
-    
+```    
