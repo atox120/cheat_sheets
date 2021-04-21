@@ -1,6 +1,6 @@
 # Raspberry Pi
 
-How to set up a Raspberry pi as a remote linux server.
+How to set up a Raspberry pi as a remote linux server. Disclaimer - this content I have collected from various sites on the web, I have provided references where I have done so. 
 
 ## Quicklinks
 
@@ -53,12 +53,12 @@ sudo usermod -aG sudo username
 ```
 Again, *username* should be substituted by the username that you wish to perform the action on. 
 
-3. Optional - deleting a user
+### 3.2 Optional - deleting a user
 
 If we wish to delete a user, it an be done with the following command:
 
 ```bash
-sudo deluser --remove-home -f username --remove-home
+sudo deluser --remove-home -f username
 ```
 Again, the *username* here hsould be substituted with the account that one wishes to delete. The --remove-home flag is an optional flag which removes the home directory of that given user. Note make sure you have have sudo permissions by running
 
@@ -72,7 +72,9 @@ Similarly, you may have issues with processes running in that users account. YOu
 sudo killall -u username
 ```
 
-The instructions for the above were taken from this [link](https://linuxize.com/post/how-to-add-and-delete-users-on-ubuntu-20-04/)
+The instructions for the above were taken in part from this [link](https://linuxize.com/post/how-to-add-and-delete-users-on-ubuntu-20-04/)
+
+### 4. Setting up SSH on Ubuntu
 
 
 
