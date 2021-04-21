@@ -72,9 +72,64 @@ Similarly, you may have issues with processes running in that users account. YOu
 sudo killall -u username
 ```
 
+### 3.3 Optional - changing the host name
+ The hostname is by default 'ubuntu'. This can be changed by modiffying the entry in the hostname file. In this example, we use vi. 
+ 
+ ```bash
+ sudo vi /etc/hostname
+ ```
+ 
+In this file you will see the current hostname. For vi, type *i* to edit and change the hostname to whatever you desire. Type *wq* to write and quit. Next you need to reboot your machine for the changes to take effect.
+
+```bash
+sudo reboot
+```
+
+
 The instructions for the above were taken in part from this [link](https://linuxize.com/post/how-to-add-and-delete-users-on-ubuntu-20-04/)
 
-### 4. Setting up SSH on Ubuntu
+## 4. Setting up SSH on Ubuntu
+
+In this section, we sett up remote access via ssh on Ubuntu. This will allow remote users to connect securely via ssh to your machine. For this we will use the utility openssh-server.
+
+### 4.1 Install setting up openssh-server
+
+Run the following commands to update apt and install the package. Type *y* to proceed at the prompts. 
+
+```bash
+sudo apt update
+sudo apt install openssh-server
+```
+
+The service will start running automatically. You can check the sttatus by running the command
+
+```bash
+sudo systemctl status ssh
+```
+
+Finally, we need to ensure that the firewall is enabled to allow SSH traffic.
+
+```bash
+sudo ufw allow ssh
+```
+
+With this set up, you should be able to connect via ssh to your instance. On a seperate computer/instance, start up a terminal (mac and linux users only, Windows will need to use a tool like [PuTTy](https://www.putty.org/). Note in he following *username* is the username associated with the account created on your RPI, and the ip address is the IP address of your RPI. 
+
+```bash
+ssh username@reaspberry_pi_ip_addresss
+```
+You can find the ip address of your RPI using the following command:
+
+```bash
+ip a
+```
+
+Upon successful connection, you will be prompted for your password. 
+
+To do:
+### Adding extra security - SSH keys.
+### Mapping volumes
+
 
 
 
