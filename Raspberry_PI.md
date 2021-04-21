@@ -2,9 +2,11 @@
 
 How to set up a Raspberry pi as a remote linux server.
 
-## 1 Prerequisites
+## Contents
 
-[link](##1-prerequisites)
+[1. Prerequisites](##1-prerequisites)
+
+## 1. Prerequisites
 
 1.  Raspberry Pi 4 + neccesary peripherals. 
 2.  Micro SD card 
