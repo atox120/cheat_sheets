@@ -53,6 +53,29 @@ sudo usermod -aG sudo username
 ```
 Again, *username* should be substituted by the username that you wish to perform the action on. 
 
+3. Optional - deleting a user
+
+If we wish to delete a user, it an be done with the following command:
+
+```bash
+sudo deluser --remove-home -f username --remove-home
+```
+Again, the *username* here hsould be substituted with the account that one wishes to delete. The --remove-home flag is an optional flag which removes the home directory of that given user. Note make sure you have have sudo permissions by running
+
+```bash
+sudo su
+```
+
+Similarly, you may have issues with processes running in that users account. YOu can halt these processes with
+
+```bash
+sudo killall -u username
+```
+
+The instructions for the above were taken from this [link](https://linuxize.com/post/how-to-add-and-delete-users-on-ubuntu-20-04/)
+
+
+
 
 
 
