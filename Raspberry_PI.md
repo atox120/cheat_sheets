@@ -129,7 +129,59 @@ Upon successful connection, you will be prompted for your password.
 To do:
 ### Adding extra security - SSH keys.
 ### Mapping volumes
+### Install python and jupyter
+### X. Install docker/docker-compose. 
 
+Here we outline how to install docker. Docker is compatible on the ARM64 architecture and Ubuntu Focal 20.04, so we are good to go. We follow the instructions from [this](https://docs.docker.com/engine/install/ubuntu/) guide for installs from a repository, making sure to run the version for *ARM64* architectures. 
+
+1. Update apt and install required packages to use the repository over HTTPS.
+
+```bash
+sudo apt-get update
+
+sudo apt-get install \
+ apt-transport-https \
+ ca-certificates \
+ curl \
+ gnupg \
+ lsb-release
+```
+
+2. Add dockers offficial GPG key
+
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+```
+
+3. Add the repository
+
+Here we add the stable repository, but there are options for the nightly and test repository. If you are interested in these, check out the [link](https://docs.docker.com/engine/install/ubuntu/)
+
+```bash
+echo \
+  "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+``` 
+
+4. Install Docker engine
+
+Here we update our apt package index and install the latest version of the Docker Engine and containerd. It is also possible to install a specific version, in which case see the instructions on the following [link](https://docs.docker.com/engine/install/ubuntu/).
+
+``` 
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+
+5. Verify the install
+
+```bash
+#Run container image 'hello-world'
+docker run hello-world
+#Check running containers
+docker ps -a
+#remove 'hello-world' container
+docker rm -f hello_world
+```
 
 
 
