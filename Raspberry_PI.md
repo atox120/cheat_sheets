@@ -4,7 +4,7 @@ How to set up a Raspberry pi as a remote linux server. Disclaimer - this content
 
 ## Quicklinks
 
-[1. Prerequisites](##1-prerequisites)
+[1. Prerequisites](##1-prerequisites) \n
 [2. OS install](##2-os-install)
 
 ## 1. Prerequisites
