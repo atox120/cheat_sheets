@@ -101,13 +101,13 @@ sudo apt update
 sudo apt install openssh-server
 ```
 
-The service will start running automatically. You can check the sttatus by running the command
+The service will start running automatically. You can check the status by running the command
 
 ```bash
 sudo systemctl status ssh
 ```
 
-Finally, we need to ensure that the firewall is enabled to allow SSH traffic.
+Next, we need to ensure that the firewall is enabled to allow SSH traffic.
 
 ```bash
 sudo ufw allow ssh
@@ -125,6 +125,54 @@ ip a
 ```
 
 Upon successful connection, you will be prompted for your password. 
+
+## 5 Static IP address Assignment
+
+If you need to assign a static IP, then follow these steps.
+
+- 5.1 Check your ethernet interface:
+
+Run the following command and check for a ethernet interface (if using):
+
+```bash
+ip a
+```
+
+In our case, we found an interface called *eth0*
+
+- 5.2 Create a netplan configuration file:
+
+Create the file ```/etc/netplan/99_config.yaml``` with the following contents:
+
+```yml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:
+      addresses:
+        - <your_ip_address/preffix_length>
+      gateway4: <your_router_gateway>
+      nameservers:
+          search: [Your_Name_ServerName]
+          addresses: [Your_Name_Server_IP]
+```
+
+- 5.3 Apply the settings
+
+```bash
+sudo netplan apply
+```
+
+Other Useful resources:
+
+- Digital Ocean article on how to configure ufw to allow ssh. [link](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-20-04)
+- Networking guides from Ubuntu. [link](https://ubuntu.com/server/docs/network-configuration)
+- Troubleshooting Ubuntu server SSH connections 1. [link](https://askubuntu.com/questions/181723/connecting-to-ubuntu-server-via-ssh-externally) 
+- Troubleshooting Ubuntu server SSH connections 2. [link](https://askubuntu.com/questions/921909/step-by-step-enable-remote-login-to-home-ubuntu-machine) 
+- Checking SSH on Linux. [link](https://cplusprogrammer.wordpress.com/2016/10/17/how-to-check-if-ssh-is-running-on-linux/)
+- Setting up Apache web Server [link](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-20-04)
+
 
 To do:
 ### Adding extra security - SSH keys.
