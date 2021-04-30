@@ -166,9 +166,11 @@ issues: volumes not mapped correctly.
 
 Note - below is not very secure, where ports are opened to the public. 
 Pre-requisites:
+
 Cloud:
 - Map Port 9092 of cloud VPC/VCN to port 9092 to instance, with ingress rule.
 - Public IP of VCN/VPC or public DNS of your cloud network. 
+
 Instance:
 - Open firewall to allow traffic on port 9092
 
