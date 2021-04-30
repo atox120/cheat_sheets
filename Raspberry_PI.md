@@ -177,6 +177,7 @@ Other Useful resources:
 To do:
 ### Adding extra security - SSH keys.
 ### Mapping volumes
+See this [guide](https://www.tecmint.com/add-new-disk-to-an-existing-linux/)
 ### Install python and jupyter
 ### X. Install docker/docker-compose. 
 
