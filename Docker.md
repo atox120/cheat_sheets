@@ -167,6 +167,56 @@ docker run -ti --volumes-from container_name image command
 
 Pull/Push image:
 
+Dockerfile:
+Full information from: https://docs.docker.com/engine/reference/builder/
+
+FROM image <- starting image to start running from. 
+MAINTAINER firstname lastname email <- who you contact when you have bugs
+RUN cmd arg <- runs a command with an argument arg through the shell
+CMD <- a command which runs when this image is started. 
+ADD file1 file2 <- adds a file1 to the other file2, or
+ADD file.tar.gz /dir <- adds contents of tar archives.
+ADD https://my.url.download.rpm /dir <- downloads content at URL and saves to directory. 
+ENV <- sets environment variablles, during build and when running result. 
+ENTRYPOINT <- specifies the start of the command to run. E.g. if you have 
+CMD <- specifies the whole command to run, 
+EXPOSE NUMBER <- maps a port into the container. Two numbers 
+VOLUME <- defines shared volumes or ephemeral volumes. Two arguments maps a host path into a container path. One argument it creates a volume that can be inherited by later containers. Avoid definind shared folders in Dockerfiles.
+WORKDIR dir <- sets the directory the container starts in
+USER name <- sets which user the container will run in. 
+
+ENTRYPOINT, RUN and CMD can use Shell or Exec Form:
+- Shell form:
+```bash
+nano notes.txt
+```
+- Exec Form:
+```bash 
+["/bin/nano","notes.txt"]
+```
+
+
+Quote on ENTRYPOINT vs CMD
+ENTRYPOINT is much like CMD, but it specifies the beginning of the expression to use when starting your container and lets you tack more on the end.
+So, if you container has an entry point of LS, then anything you type when you say Docker run my image name would be treated as arguments to the LS command.
+CMD specifies the whole command to run, and if the person, when they're running the container, types something after Docker run image name,
+that will be run instead of CMD.
+ENTRYPOINT gets added to when people add arguments to your container and CMD gets replaced when people add arguments to your container.
+You can actually use both of them together.
+If you have them both, they get strung together, one after the other.
+In general, if you're trying to make something that looks like a program and you want people to not care that it's running inside a Docker container,ENTRYPOINT is for making your containers look like normal programs.
+CMD is probably what you want to use almost all the time, unless you're trying to do that.
+
+Builder:
+- Split the docker file into using builder, you can copy some aspects of other build files. 
+
+Build tips:
+- include installers in your project
+- have a canonical build that builds everything from scratch
+- tag your buids with the git hash of the code that built it. 
+- use small base images - like alpine. 
+- 
+
 
 
 ### Somethings for networking:
@@ -176,5 +226,7 @@ Pull/Push image:
 Some notes:
 * Don't let containerrs fetch containers when they start - make them fully self contained.
 * Don't leave things lying around in stopped containers - always clean up after onself. 
+* Building images - each line is it's own process - processes you start on one line will not be running on the next line. 
+* Environment variablles will be set on the next line using the ENV command. 
   
   
