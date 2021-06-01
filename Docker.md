@@ -8,7 +8,7 @@ Here in are some useful commands for docker related operations.
 docker run 
 ```
 
-link[https://docs.docker.com/engine/reference/run/]
+[link](https://docs.docker.com/engine/reference/run/)
 
 some useful arguments:
 -ti terminal interactive
@@ -215,7 +215,41 @@ Build tips:
 - have a canonical build that builds everything from scratch
 - tag your buids with the git hash of the code that built it. 
 - use small base images - like alpine. 
-- 
+
+
+## Registry
+
+You can create a registry of your images by running the image 'registry', the below command creates a container running a registry:
+
+```bash
+docker run -d -p 5000:5000 --restart=always --name my_registry registry:2
+```
+Then th push command becomes
+```bash
+docker push localhost:5000/my_company/my_image_name:version
+```
+Note you need to set up the authentication, and storage for this - see the docker registry documentation. You can save docker images locally:
+
+```bash
+docker save -o my-images.tar.gz image:version1 image2:version2 ...
+```
+
+## Orchestration:
+Why?
+- Start and restart containers.
+- Service discovery - helps the containers fiind each other
+- Resource allocation - match containers to compute
+
+Options:
+- Docker compose.
+- Kubernetes
+- Amazon ECS
+- Amazon fargate
+- Docker swarm
+- Google kubernetes engine
+- Azume Kubernetes
+
+## Some kubernetes
 
 
 
