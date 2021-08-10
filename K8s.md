@@ -98,9 +98,33 @@ Modes are important...
 
 ## Some basic commands
 
+### Pods
+Get pods and delete things:
 ```bash
 kubectl get pods
+     --show-labels
+     --selector <dev-lead>=<name>,<env>=<label2>
+     -l 'release-version in (1.0, 2,0)' #label with release version between 1 and 2, can use notin for negative. 
+
+kubectl delete pods
+     -l <dev-lead>=<name>  #-l flag for label. 
+
+kubectl get deployments
+
+kubectl create -f filename.yaml #initialise deployment in .yaml file. 
+
+kubectl get replicaset
+
+kubectl describe po/<pod name> # describe current status of the pod. 
 ```
+
+### Application health checks
+readiness probe - used to know when the pod is ready to accept traffic. 
+timeout seconds = amount of time to wait before timeing out.
+livenessprobe - length of time to wait for pod to initialise.
+
+
+
 
 
 
