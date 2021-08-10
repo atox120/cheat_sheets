@@ -103,7 +103,7 @@ Get pods and delete things:
 ```bash
 kubectl get pods
      --show-labels
-     --selector <dev-lead>=<name>,<env>=<label2>
+     --selector <dev-lead>=<name>,<env>=<label2> #Selects pods 
      -l 'release-version in (1.0, 2,0)' #label with release version between 1 and 2, can use notin for negative. 
 
 kubectl delete pods
@@ -112,11 +112,78 @@ kubectl delete pods
 kubectl get deployments
 
 kubectl create -f filename.yaml #initialise deployment in .yaml file. 
+     --record - records the rollout history,.
 
 kubectl get replicaset
 
 kubectl describe po/<pod name> # describe current status of the pod. 
+
+#Update deployment
+kubectl set image deployment/navbar-deployment helloworld=karthequian/helloworld:blue
+#Undo update:
+kubectl rollout undo deployment/navbar-deployment
+
+kubectl rollout history deployment/navbar-deployment
+
+kubectl logs <pod name>
+
+kubectl exec -it <pod name> /bin/bash #Execs into pod and runs a bash terminal. 
+
+kubectl create configmap logger --from-literal=log_level=debug
+
+kubectl create secret generic <secret name> --from-literal=<key>=<value> #creates a secret key
+kubectl get secrets #shows secrets.
+    - <secret name> #lists secret properties
+    - <secret name> -o yaml #view secret yaml file. 
+    
+kubectl get gronjob
+kubectl get jobs
+
+kubectl create daemonset. 
+
+
+
 ```
+### Cronjobs
+For cronjobs - you canstart and stop by adjusting the 'suspend' status. True = stop, False = running.
+
+### DaemonSet
+ensures all nodes run a copy of specific pods. 
+
+### StatefulSet
+Stateful sets manage the deployment and scaling for a set of pods, and provide guarantees about the ordering and the uniqueness of these pods. But unlike a deployment, a stateful set manages the sticky identity for each of these pods.
+
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secretreader
+  labels:
+    name: secretreader
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: secretreader
+  template:
+    metadata:
+      labels:
+        name: secretreader
+    spec:
+      containers:
+      - name: secretreader
+        image: karthequian/secretreader:latest
+        env:
+        - name: api_key
+          valueFrom:
+            secretKeyRef:
+              name: apikey
+              key: api_key
+```
+
+References:
+https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
 
 ### Application health checks
 
@@ -125,6 +192,16 @@ readiness probe - used to know when the pod is ready to accept traffic.
 timeout seconds = amount of time to wait before timeing out.
 
 livenessprobe - length of time to wait for pod to initialise.
+The readinessProbe detects when a container can accept traffic, and the livenessProbe checks whether the container is alive and running.
+
+```bash
+minikube addons list #list addons
+
+minikube addons enable <addon name> #Enables a particular addon. 
+
+minikube <add-on> #runs the addon. 
+
+```
 
 
 
