@@ -119,8 +119,11 @@ kubectl describe po/<pod name> # describe current status of the pod.
 ```
 
 ### Application health checks
+
 readiness probe - used to know when the pod is ready to accept traffic. 
+
 timeout seconds = amount of time to wait before timeing out.
+
 livenessprobe - length of time to wait for pod to initialise.
 
 
