@@ -95,4 +95,12 @@ Kubelet and kube-proxy:
 --Ipvs mode.
 Modes are important...
 
+
+## Some basic commands
+
+'''bash
+kubectl get pods
+'''
+
+
  
