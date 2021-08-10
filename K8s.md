@@ -98,9 +98,11 @@ Modes are important...
 
 ## Some basic commands
 
-'''bash
+```bash
 kubectl get pods
-'''
+```
+
+
 
 
  
